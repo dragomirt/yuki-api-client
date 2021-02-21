@@ -89,4 +89,20 @@ class AccountInfoClient extends Client
         throw UnexpectedTypeException::fromValue($arrayResponse, 'array');
     }
 
+    public function getPeriodDateTable(
+        string $administrationID,
+        string $yearID = "0000"
+    ):array {
+        $arguments = compact("administrationID", "yearID");
+
+        $response = $this->call('GetPeriodDateTable', $arguments);
+        $arrayResponse = (array) $response->GetPeriodDateTableResult ?? null;
+
+        if (is_array($arrayResponse)) {
+            return $arrayResponse;
+        }
+
+        throw UnexpectedTypeException::fromValue($arrayResponse, 'array');
+    }
+
 }
